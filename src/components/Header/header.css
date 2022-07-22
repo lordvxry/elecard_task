@@ -1,0 +1,6 @@
+.header-container{
+    height: 100px;
+    position: fixed;
+    background-color: aquamarine;
+    width: 100%;
+}
