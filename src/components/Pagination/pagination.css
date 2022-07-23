@@ -4,3 +4,7 @@
     margin: 5px;
     cursor: pointer;
 }
+
+.selected {
+    background: red;
+}
