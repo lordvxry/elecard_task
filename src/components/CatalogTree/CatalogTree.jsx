@@ -4,8 +4,8 @@ import "./catalogTree.css";
 const CatalogTree = (props) => {
     const {catalog} = props;
     const [showItem, setShowItem] = useState(false);
-    const [showC, setShowC] = useState(false);
     const [showImage, setShowImage] = useState(true);
+    const [openedObjects, setOpenedObjects] = useState([]);
 
     const baseUrl = "http://contest.elecard.ru/frontend_data/";
 
@@ -13,18 +13,37 @@ const CatalogTree = (props) => {
         setShowItem(!showItem);
     };
 
-    const handleClickC = (id, itemId) => {
-        console.log(itemId);
-        if (catalog[itemId].id) {
-            setShowC(!showC);
-        } else if (!catalog[itemId].id) {
-            setShowC(showC);
+    const handleClickC = (id) => {
+        let currentOpenedObjects = [];
+
+        if (openedObjects.includes(id)) {
+             currentOpenedObjects = openedObjects.filter(curentId => {return curentId !== id});
+        } else {
+             currentOpenedObjects = [...openedObjects, id];
         }
+
+        setOpenedObjects(currentOpenedObjects)
     };
 
     const onChangeImage = () => {
         setShowImage(!showImage);
     };
+
+    const getCurrentDate = (timestamp) => {
+        if (!timestamp) return '';
+
+        const date = new Date(timestamp);
+        const formatDate = new Intl.DateTimeFormat("en-GB", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+        }).format(date);
+
+        return formatDate;
+    }
 
     return (
         <div className="tree-container">
@@ -32,26 +51,19 @@ const CatalogTree = (props) => {
             <div className="tree-content">
                 {showItem &&
                     catalog.map((item, index) => {
-                        const date = new Date(item.timestamp);
-                        const formatDate = new Intl.DateTimeFormat("en-GB", {
-                            year: "numeric",
-                            month: "2-digit",
-                            day: "2-digit",
-                            hour: "2-digit",
-                            minute: "2-digit",
-                            second: "2-digit",
-                        }).format(date);
+                        const itemId = item.id;
 
                         return (
-                            <div key={item.id}>
-                <span
-                    onClick={() => {
-                        handleClickC(item.id, index);
-                    }}
-                >
-                  Item № {item.id}
-                </span>
-                                {showC && (
+                            <div key={itemId}>
+                                <span
+                                    onClick={() => {
+                                        handleClickC(itemId);
+                                    }}
+                                >
+                                   Item № {itemId}
+                                </span>
+                                
+                                {openedObjects.includes(itemId) && (
                                     <div className="tree-content">
                                         <img
                                             className={showImage ? "tree-smallImg" : "tree-fullImg"}
@@ -65,7 +77,7 @@ const CatalogTree = (props) => {
                                             <span className="tree-contentText">File size:</span> {item.filesize}
                                         </div>
                                         <div>
-                                            <span className="tree-contentText">Date:</span> {formatDate}
+                                            <span className="tree-contentText">Date:</span> {getCurrentDate(item.timestamp)}
                                         </div>
                                     </div>
                                 )}
