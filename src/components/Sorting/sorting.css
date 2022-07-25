@@ -1,0 +1,8 @@
+.radio-btns {
+    display: flex;
+    gap: 10px;
+}
+
+.radio-btns div {
+    display: flex;
+}
