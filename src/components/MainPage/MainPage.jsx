@@ -5,6 +5,7 @@ import MainPageCatalog from "../MainPageCatalog/MainPageCatalog";
 import "./mainPage.css";
 import { connect } from "react-redux";
 import Pagination from "../Pagination/Pagination";
+import CatalogTree from "../CatalogTree/CatalogTree";
 
 const baseSortValue = "id";
 const basePageNumber = 1;
@@ -13,19 +14,19 @@ const baseClosedCardIds =
 
 const radioButtons = [
   {
-    title: "Стандартная:",
+    title: "Standard",
     value: "id",
   },
   {
-    title: "По категории:",
+    title: "Category",
     value: "category",
   },
   {
-    title: "По размеру файла:",
-    value: "fileSize",
+    title: "File size",
+    value: "filesize",
   },
   {
-    title: "По дате:",
+    title: "Date",
     value: "timestamp",
   },
 ];
@@ -37,6 +38,8 @@ const MainPage = (props) => {
   const [currentSortValue, setSortValue] = useState(baseSortValue);
   const [closedCardIds, updateClosedCardIds] = useState(baseClosedCardIds);
   const [catalogPerPage] = useState(40);
+
+  const [classicView, setClassicView] = useState(true);
 
   const lastCatalogIndex = currentPage * catalogPerPage;
   const firstCatalogIndex = lastCatalogIndex - catalogPerPage;
@@ -71,37 +74,67 @@ const MainPage = (props) => {
     updateClosedCardIds(currentClosedArr);
   };
 
+  const onChangedView = (value) => {
+    value === "classic" ? setClassicView(true) : setClassicView(false);
+  };
+
   return (
     <div className="mainPage-container">
-      <div>
+      <div className="mainPage-viewPanel">
+        <div className="mainPage-viewPanel-text">Sorting:</div>
+        <div>
+          <label>Classic view</label>
+          <input
+            type="radio"
+            name="view"
+            value="classic"
+            onClick={(e) => onChangedView(e.currentTarget.value)}
+            defaultChecked
+          ></input>
+          <label>Tree view</label>
+          <input
+            type="radio"
+            name="view"
+            value="tree"
+            onClick={(e) => onChangedView(e.currentTarget.value)}
+          ></input>
+        </div>
+      </div>
+      <div className="mainPage-btns">
+        <div className="mainPage-btns-radio">
+          {radioButtons.map((button, index) => {
+            return (
+              <div key={index}>
+                <label>{button.title}</label>
+                <input
+                  type="radio"
+                  name="sort"
+                  value={button.value}
+                  onClick={() => {
+                    sortByCatalog(button.value);
+                  }}
+                />
+              </div>
+            );
+          })}
+        </div>
         <button onClick={() => cleanPageParams()}>AWESOME BUTTON</button>
-        {radioButtons.map((button, index) => {
-          return (
-            <div key={index}>
-              <label>{button.title} </label>
-              <input
-                type="radio"
-                name="sort"
-                value={button.value}
-                onClick={() => {
-                  sortByCatalog(button.value);
-                }}
-              />
-            </div>
-          );
-        })}
       </div>
       <div className="mainPage-content">
         {isLoading === false ? (
-          currentCatalog.map((data) => {
-            return (
-              <MainPageCatalog
-                key={data.id}
-                catalog={data}
-                onChangeVisibilityCard={onChangeVisibilityCard}
-              />
-            );
-          })
+          classicView ? (
+            currentCatalog.map((data) => {
+              return (
+                <MainPageCatalog
+                  key={data.id}
+                  catalog={data}
+                  onChangeVisibilityCard={onChangeVisibilityCard}
+                />
+              );
+            })
+          ) : (
+            <CatalogTree catalog={currentCatalog} />
+          )
         ) : (
           <div className="isLoading"></div>
         )}

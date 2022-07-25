@@ -1,0 +1,33 @@
+.tree-container {
+  width: 100%;
+  padding-right: 20px;
+}
+
+.tree-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  left: 25;
+  border-left: 1px dashed;
+  margin: 10px 0px;
+  padding: 0px 15px;
+}
+
+.tree-content img {
+  cursor: pointer;
+}
+
+.tree-contentText {
+  text-decoration: underline;
+}
+
+.tree-smalImg {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.tree-fullImg {
+  width: 100%;
+  height: 100%;
+}
