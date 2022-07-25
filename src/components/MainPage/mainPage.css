@@ -50,7 +50,7 @@
     height: fit-content;
 }
 
-.isLoading {
+.loading {
     margin: 20vh auto;
     width: 100px;
     height: 100px;

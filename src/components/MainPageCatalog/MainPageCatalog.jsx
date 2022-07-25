@@ -11,8 +11,18 @@ const MainPageCatalog = (props) => {
             timestamp
         },
         onChangeVisibilityCard,
-        closedAnimation
     } = props;
+
+    const [isClosed, closeCard] = useState(false);
+
+    const handleCloseElem = () => {
+        closeCard(true);
+
+        setTimeout(() => {
+            onChangeVisibilityCard(id);
+        }, 300)
+    }
+
     const baseUrl = "http://contest.elecard.ru/frontend_data/";
 
     const date = new Date(timestamp);
@@ -26,8 +36,8 @@ const MainPageCatalog = (props) => {
     }).format(date);
 
     return (
-        <div className={closedAnimation ? "closed-content" : "catalog-content"}>
-            <button onClick={() => onChangeVisibilityCard(id)}>X</button>
+        <div className={`catalog-content${isClosed ? " closed-content" : ""}`}>
+            <button onClick={handleCloseElem}>X</button>
             <img className="catalog-image" src={`${baseUrl}${image}`}/>
             <div>
                 <div>

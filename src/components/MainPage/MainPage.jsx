@@ -13,16 +13,14 @@ const baseClosedCardIds =
     JSON.parse(localStorage.getItem("closedCardIds")) || [];
 
 const MainPage = (props) => {
-    const {catalog, isLoading, getCatalog} = props;
+    const {catalog, loading, getCatalog} = props;
 
     const [currentPage, setCurrentPage] = useState(basePageNumber);
     const [currentSortValue, setSortValue] = useState(baseSortValue);
     const [closedCardIds, updateClosedCardIds] = useState(baseClosedCardIds);
     const [catalogPerPage] = useState(40);
 
-    const [classicView, setClassicView] = useState(true);
-
-    const [closedAnimation,setClosedAnimation] = useState(false)
+    const [isClassicView, setClassicView] = useState(true);
 
     const lastCatalogIndex = currentPage * catalogPerPage;
     const firstCatalogIndex = lastCatalogIndex - catalogPerPage;
@@ -52,12 +50,9 @@ const MainPage = (props) => {
     };
 
     const onChangeVisibilityCard = (cardId) => {
-        setClosedAnimation(true)
-        setTimeout(() => {
             const currentClosedArr = [...closedCardIds, cardId];
             localStorage.setItem("closedCardIds", JSON.stringify(currentClosedArr));
             updateClosedCardIds(currentClosedArr);
-        }, 3000)
     };
 
     const onChangedView = (value) => {
@@ -87,27 +82,26 @@ const MainPage = (props) => {
                 </div>
             </div>
             <div className="mainPage-btns">
-                <Sorting sortByCatalog={sortByCatalog}/>
+                <Sorting currentSortValue={currentSortValue} sortByCatalog={sortByCatalog}/>
                 <button onClick={() => cleanPageParams()}>AWESOME BUTTON</button>
             </div>
             <div className="mainPage-content">
-                {isLoading === false ? (
-                    classicView ? (
+                {loading ? (
+                    <div className="loading" />
+                ) : (
+                    isClassicView ? (
                         currentCatalog.map((data) => {
                             return (
                                 <MainPageCatalog
                                     key={data.id}
                                     catalog={data}
                                     onChangeVisibilityCard={onChangeVisibilityCard}
-                                    closedAnimation={closedAnimation}
                                 />
                             );
                         })
                     ) : (
                         <CatalogTree catalog={currentCatalog}/>
                     )
-                ) : (
-                    <div className="isLoading"></div>
                 )}
             </div>
             <Pagination
@@ -123,7 +117,7 @@ const MainPage = (props) => {
 export const mapStateToProps = (state) => {
     return {
         catalog: state.catalogReducer.data,
-        isLoading: state.catalogReducer.isLoading,
+        loading: state.catalogReducer.loading,
     };
 };
 

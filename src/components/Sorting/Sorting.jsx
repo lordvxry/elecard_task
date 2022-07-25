@@ -20,19 +20,20 @@ const radioButtons = [
     },
 ];
 
-const Sorting = ({sortByCatalog}) => {
+const Sorting = ({sortByCatalog, currentSortValue}) => {
+
     return (
         <div className="radio-btns">
-            {radioButtons.map((button, index) => {
+            {radioButtons.map(({title, value}, index) => {
                 return (
                     <div key={index}>
-                        <label>{button.title}</label>
+                        <label>{title}</label>
                         <input
                             type="radio"
                             name="sort"
-                            value={button.value}
-                            onClick={() => {
-                                sortByCatalog(button.value);
+                            checked={value === currentSortValue}
+                            onChange={() => {
+                                sortByCatalog(value);
                             }}
                         />
                     </div>
