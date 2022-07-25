@@ -1,17 +1,17 @@
-.pagination-container{
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
+.pagination-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.page{
-    border: 1px solid gray;
-    padding: 5px 10px;
-    margin: 5px;
-    cursor: pointer;
+.page {
+  border: 1px solid gray;
+  padding: 5px 10px;
+  margin: 5px;
+  cursor: pointer;
 }
 
 .selected {
-    font-weight: bold;
-    background: rgba(151, 151, 151, 0.253);
+  font-weight: bold;
+  background: rgba(151, 151, 151, 0.253);
 }

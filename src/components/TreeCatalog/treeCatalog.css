@@ -20,16 +20,16 @@
   cursor: pointer;
 }
 
-.tree-header{
+.tree-header {
   font-size: 20px;
   font-weight: bold;
 }
 
-.tree-tumbler{
+.tree-tumbler {
   cursor: pointer;
 }
 
-.tree-itemText{
+.tree-itemText {
   font-size: 17px;
 }
 

@@ -1,0 +1,20 @@
+.mainPage-viewPanel {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.mainPage-viewPanel input {
+  cursor: pointer;
+}
+
+.mainPage-viewPanel-text {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.mainPage-viewPanel-radio {
+  display: flex;
+}

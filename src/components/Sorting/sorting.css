@@ -1,12 +1,12 @@
 .radio-btns {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 }
 
 .radio-btns input {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .radio-btns div {
-    display: flex;
+  display: flex;
 }
