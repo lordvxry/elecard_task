@@ -1,7 +1,9 @@
 import React, {useState} from "react";
-import "./mainPageCatalog.css";
+import "./catalogCards.css";
+import {baseUrl} from "../../global/constants";
+import {getCurrentDate} from "../../global/functions";
 
-const MainPageCatalog = (props) => {
+const CatalogCards = (props) => {
     const {
         catalog: {
             id,
@@ -23,18 +25,6 @@ const MainPageCatalog = (props) => {
         }, 300)
     }
 
-    const baseUrl = "http://contest.elecard.ru/frontend_data/";
-
-    const date = new Date(timestamp);
-    const formatDate = new Intl.DateTimeFormat("en-GB", {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-    }).format(date);
-
     return (
         <div className={`catalog-content${isClosed ? " closed-content" : ""}`}>
             <button onClick={handleCloseElem}>X</button>
@@ -50,11 +40,11 @@ const MainPageCatalog = (props) => {
                 </div>
                 <div>
                     <span className="catalog-fields">Date: </span>
-                    {formatDate}
+                    {getCurrentDate(timestamp)}
                 </div>
             </div>
         </div>
     );
 };
 
-export default MainPageCatalog;
+export default CatalogCards;

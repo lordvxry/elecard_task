@@ -1,21 +1,36 @@
 .tree-container {
-  width: 100%;
-  height: 64vh;
-  padding-right: 20px;
+  border-top: 1px solid;
+  padding-top: 20px;
+  max-height: 70vh;
+  overflow-y: auto;
+  overflow-x: auto;
 }
 
 .tree-content {
   position: relative;
   display: flex;
   flex-direction: column;
-  left: 25px;
   border-left: 1px dashed;
-  margin: 10px 0px;
-  padding: 0px 15px;
+  margin: 10px 0;
+  padding: 0 15px;
+  gap: 5px;
 }
 
 .tree-content img {
   cursor: pointer;
+}
+
+.tree-header{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.tree-tumbler{
+  cursor: pointer;
+}
+
+.tree-itemText{
+  font-size: 17px;
 }
 
 .tree-contentText {

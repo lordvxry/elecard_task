@@ -10,10 +10,11 @@
 }
 
 .closed-content{
-  animation: closing 300ms;
+  animation: closing 350ms;
 }
 
 .catalog-content button {
+  cursor: pointer;
   align-self: end;
   font-weight: bold;
   color: rgba(0, 0, 0, 0.726);

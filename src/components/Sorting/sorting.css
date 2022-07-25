@@ -3,6 +3,10 @@
     gap: 10px;
 }
 
+.radio-btns input {
+    cursor: pointer;
+}
+
 .radio-btns div {
     display: flex;
 }
