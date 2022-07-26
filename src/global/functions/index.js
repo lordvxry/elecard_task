@@ -13,3 +13,9 @@ export const getCurrentDate = (timestamp) => {
 
   return formatDate;
 };
+
+export const getCurrentName = (path) => {
+  const cutName = path.indexOf("/")
+  const name = path.slice(cutName + 1)
+  return name
+}

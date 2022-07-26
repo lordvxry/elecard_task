@@ -3,7 +3,7 @@ const SET_IS_LOADING = "SET_IS_LOADING";
 
 const initialState = {
   data: [],
-  isLoading: true,
+  loading: true,
 };
 
 export default function catalogReducer(state = initialState, action) {
@@ -12,12 +12,12 @@ export default function catalogReducer(state = initialState, action) {
       return {
         ...state,
         data: action.payload,
-        isLoading: false,
+        loading: false,
       };
     case SET_IS_LOADING:
       return {
         ...state,
-        isLoading: action.payload,
+        loading: action.payload,
       };
     default:
       return state;

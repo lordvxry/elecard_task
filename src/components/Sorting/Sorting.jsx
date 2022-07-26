@@ -7,6 +7,10 @@ const radioButtons = [
     value: "id",
   },
   {
+    title: "Name",
+    value: "name",
+  },
+  {
     title: "Category",
     value: "category",
   },

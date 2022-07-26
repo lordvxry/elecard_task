@@ -5,7 +5,7 @@ import { getCurrentDate } from "../../global/functions";
 
 const CatalogCards = (props) => {
   const {
-    catalog: { id, image, category, filesize, timestamp },
+    catalog: { id, image, category, filesize, timestamp, name },
     onChangeVisibilityCard,
   } = props;
 
@@ -23,7 +23,11 @@ const CatalogCards = (props) => {
     <div className={`catalog-content${isClosed ? " closed-content" : ""}`}>
       <button onClick={handleCloseElem}>X</button>
       <img className="catalog-image" src={`${baseUrl}${image}`} />
-      <div>
+      <div className="catalog-fields-container">
+        <div>
+          <span className="catalog-fields">Name: </span>
+          {name}
+        </div>
         <div>
           <span className="catalog-fields">Category: </span>
           {category}

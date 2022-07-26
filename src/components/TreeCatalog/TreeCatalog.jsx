@@ -69,6 +69,10 @@ const TreeCatalog = (props) => {
                       onClick={() => onChangeImage(itemId)}
                     />
                     <div className="tree-contentField">
+                      <span className="tree-contentText">Name:</span>{" "}
+                      {item.name}
+                    </div>
+                    <div className="tree-contentField">
                       <span className="tree-contentText">Category:</span>{" "}
                       {item.category}
                     </div>
