@@ -4,15 +4,14 @@ import Sorting from "../Sorting/Sorting";
 import CatalogCards from "../CatalogCards/CatalogCards";
 import Pagination from "../Pagination/Pagination";
 import {
-  baseClosedCardIds,
   basePageNumber,
   baseSortValue,
 } from "../../global/constants";
 
-const ClassicCatalog = ({ catalog }) => {
+const ClassicCatalog = (props) => {
+  const { catalog, closedCardIds, updateClosedCardIds } = props
   const [currentPage, setCurrentPage] = useState(basePageNumber);
   const [currentSortValue, setSortValue] = useState(baseSortValue);
-  const [closedCardIds, updateClosedCardIds] = useState(baseClosedCardIds);
   const [catalogPerPage] = useState(40);
 
   const lastCatalogIndex = currentPage * catalogPerPage;

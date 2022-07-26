@@ -5,11 +5,13 @@ import { connect } from "react-redux";
 import TreeCatalog from "../TreeCatalog/TreeCatalog";
 import ClassicCatalog from "../ClassicCatalog/ClassicCatalog";
 import MainPageViewPanel from "../MainPageVIewPanel/MainPageVIewPanel";
+import {baseClosedCardIds} from "../../global/constants";
 
 const MainPage = (props) => {
   const { catalog, loading, getCatalog } = props;
   const [isClassicView, setClassicView] = useState(true);
   const catalogCopy = JSON.parse(JSON.stringify(catalog));
+  const [closedCardIds, updateClosedCardIds] = useState(baseClosedCardIds);
 
   useEffect(() => {
     getCatalog();
@@ -29,7 +31,7 @@ const MainPage = (props) => {
         {loading ? (
           <div className="loading" />
         ) : isClassicView ? (
-          <ClassicCatalog catalog={catalog} />
+          <ClassicCatalog catalog={catalog} closedCardIds={closedCardIds} updateClosedCardIds={updateClosedCardIds} />
         ) : (
           <TreeCatalog catalog={catalogCopy} />
         )}
