@@ -34,8 +34,6 @@ const ClassicCatalog = (props) => {
   const sortByCatalog = (data) => setSortValue(data);
 
   const cleanPageParams = () => {
-    sortByCatalog(baseSortValue);
-    setCurrentPage(basePageNumber);
     updateClosedCardIds([]);
     localStorage.removeItem("closedCardIds");
   };
